@@ -15,3 +15,30 @@ Acrescenta ao arquivo existente: new FileWriter(path, true)
 
 ### Bloco try-with-resources (Java 7 em diante)
 * https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
+
+
+```java
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Program {
+
+    public static void main(String[] args) {
+
+        String[] lines = new String[] {"Good morning", "Good afternoon", "Good night"};
+
+        String path = "c:\\temp\\out.txt";
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) { // parâmetro true não recria o arquivo
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
